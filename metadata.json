@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Remix box",
+  "description": "Criyon | Branding, UI/UX & Mobile App Design Studio portfolio featuring MIRA AI Glasses, RJ Group Textile Machinery E-Commerce, and Startech Awards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
