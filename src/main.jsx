@@ -17,6 +17,7 @@ import CasePage from "./pages/CasePage";
 import Blog from "./pages/Blog";
 import BlogPostPage from "./pages/BlogPostPage";
 import Products from "./pages/Products";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function ScrollToTopOnRoute() {
   const { pathname, hash } = useLocation();
@@ -165,8 +166,8 @@ function App() {
           <Route path="/case/:id" element={<CasePage onOpenContact={handleOpenContact} />} />
           <Route path="/blog" element={<Blog onOpenContact={handleOpenContact} />} />
           <Route path="/blog/:slug" element={<BlogPostPage onOpenContact={handleOpenContact} />} />
-          {/* Fallback to Home */}
-          <Route path="*" element={<Home onOpenContact={handleOpenContact} />} />
+          {/* 404 Not Found Page */}
+          <Route path="*" element={<NotFoundPage onOpenContact={handleOpenContact} />} />
         </Routes>
       </AppShell>
 

@@ -7,6 +7,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Criyon | Branding, UI/UX &amp; Mobile App Design Studio</title>
+
+    <!-- SPA Redirect Handler for GitHub Pages & static web hosts -->
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
     <meta name="description" content="Criyon is a branding, UI/UX design, mobile app design &amp; development, and website development studio led by Akash Kumaravel. Concept to launch in 20 days.">
     <meta name="keywords" content="branding agency, UI/UX design studio, mobile app design company, mobile app development company, website development company, brand identity design, product design studio">
     <meta name="author" content="Akash Kumaravel">
