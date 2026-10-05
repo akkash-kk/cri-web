@@ -12,13 +12,14 @@ export const ASSETS = {
 
 export const CASES = [
   {
-    id: "13d59ec8-5229-4aeb-b0db-447e3fd6dc4c",
-    title: "MIRA AI Glasses",
-    category: "UI/UX Design",
-    client: "Mira Inc",
+    id: "legal-link",
+    title: "Legal Link",
+    category: "AI & Legal Tech",
+    client: "Legal Link Technologies",
     year: "2025",
-    link: "/case/mira",
-    img: asset("13d59ec8-5229-4aeb-b0db-447e3fd6dc4c")
+    link: "/case/legal-link",
+    brandColor: "#FF6B00",
+    img: "https://larkh.vercel.app/connect%201.png"
   },
   {
     id: "rj-group-textile",
@@ -28,20 +29,11 @@ export const CASES = [
     year: "2025",
     link: "/case/rj-group",
     brandColor: "#DC2626",
-    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&auto=format&fit=crop&q=80"
-  },
-  {
-    id: "1f85fdcc-1768-488d-8279-e29c2d0233df",
-    title: "Startech Awards",
-    category: "Branding",
-    client: "Startech Global",
-    year: "2025",
-    link: "#",
-    img: asset("1f85fdcc-1768-488d-8279-e29c2d0233df")
+    img: "https://larkh.vercel.app/RJ%20group%20img%201.jpg"
   }
 ];
 
-export const MIRA_GALLERY = [
+export const LEGAL_LINK_GALLERY = [
   "https://larkh.vercel.app/connect%201.png",
   "https://larkh.vercel.app/connect%202.png",
   "https://larkh.vercel.app/connect%203.png",
@@ -49,12 +41,13 @@ export const MIRA_GALLERY = [
   "https://larkh.vercel.app/connect%205.png"
 ];
 
+export const MIRA_GALLERY = LEGAL_LINK_GALLERY;
+
 export const RJ_GROUP_GALLERY = [
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=1600&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=1600&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=1600&auto=format&fit=crop&q=80"
+  "https://larkh.vercel.app/RJ%20group%20img%201.jpg",
+  "https://larkh.vercel.app/RJ%20group%20img%203.jpg",
+  "https://larkh.vercel.app/RJ%20group%20img%205.jpg",
+  "https://larkh.vercel.app/RJ%20group%20img%206.jpg"
 ];
 
 export const BLOG_POSTS = [

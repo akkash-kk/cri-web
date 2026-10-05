@@ -161,11 +161,11 @@ export default function CaseRJGroup({ onOpenContact }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="group relative rounded-3xl overflow-hidden bg-[#161616] text-white shadow-xl aspect-[16/10] sm:aspect-[16/9] flex flex-col justify-between p-6 sm:p-10 lg:p-12 cursor-pointer"
-            onClick={() => setSelectedImg("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80")}
+            onClick={() => setSelectedImg("https://larkh.vercel.app/RJ%20group%20img%201.jpg")}
           >
             {/* Background Image with dark industrial gradient */}
             <img
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80"
+              src="https://larkh.vercel.app/RJ%20group%20img%201.jpg"
               alt="RJ Group Premium Textile Machinery"
               className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 ease-out group-hover:scale-104"
             />

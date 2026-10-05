@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./styles.css";
@@ -9,15 +9,17 @@ import Footer from "./components/Footer";
 import ContactModal from "./components/ContactModal";
 import ContactFAB from "./components/ContactFAB";
 import LoadingScreen from "./components/LoadingScreen";
+import PageLoader from "./components/PageLoader";
 import FullscreenControl from "./components/FullscreenControl";
 
-import Home from "./pages/Home";
-import Cases from "./pages/Cases";
-import CasePage from "./pages/CasePage";
-import Blog from "./pages/Blog";
-import BlogPostPage from "./pages/BlogPostPage";
-import Products from "./pages/Products";
-import NotFoundPage from "./pages/NotFoundPage";
+// Lazy-load page components for instant initial bundle loading and on-demand route chunks
+const Home = lazy(() => import("./pages/Home"));
+const Products = lazy(() => import("./pages/Products"));
+const Cases = lazy(() => import("./pages/Cases"));
+const CasePage = lazy(() => import("./pages/CasePage"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function ScrollToTopOnRoute() {
   const { pathname, hash } = useLocation();
@@ -62,7 +64,21 @@ function AppShell({
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      const hasVisited = sessionStorage.getItem("adelt_site_visited");
+      const currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
+      const isHomePage = currentPath === "/" || currentPath === "/index.html";
+
+      // Show intro loading screen ONLY if:
+      // 1. First time visiting the site in this browser session
+      // 2. Refreshing or directly loading the home page ("/")
+      return !hasVisited || isHomePage;
+    } catch (e) {
+      return window.location.pathname === "/" || window.location.pathname === "";
+    }
+  });
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [contactInitialService, setContactInitialService] = useState("Go-to-Market Strategy");
@@ -147,7 +163,16 @@ function App() {
   return (
     <BrowserRouter>
       {isLoading && (
-        <LoadingScreen onComplete={() => setIsLoading(false)} />
+        <LoadingScreen
+          onComplete={() => {
+            try {
+              sessionStorage.setItem("adelt_site_visited", "true");
+            } catch (e) {
+              // Ignore session storage error
+            }
+            setIsLoading(false);
+          }}
+        />
       )}
       <ScrollToTopOnRoute />
       <ScrollProgressBar />
@@ -157,18 +182,21 @@ function App() {
         setIsNavOpen={setIsNavOpen}
         handleOpenContact={handleOpenContact}
       >
-        <Routes>
-          <Route path="/" element={<Home onOpenContact={handleOpenContact} />} />
-          <Route path="/products" element={<Products onOpenContact={handleOpenContact} />} />
-          <Route path="/cases" element={<Cases onOpenContact={handleOpenContact} />} />
-          <Route path="/case/mira" element={<CasePage caseId="mira" onOpenContact={handleOpenContact} />} />
-          <Route path="/case/rj-group" element={<CasePage caseId="rj-group" onOpenContact={handleOpenContact} />} />
-          <Route path="/case/:id" element={<CasePage onOpenContact={handleOpenContact} />} />
-          <Route path="/blog" element={<Blog onOpenContact={handleOpenContact} />} />
-          <Route path="/blog/:slug" element={<BlogPostPage onOpenContact={handleOpenContact} />} />
-          {/* 404 Not Found Page */}
-          <Route path="*" element={<NotFoundPage onOpenContact={handleOpenContact} />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home onOpenContact={handleOpenContact} />} />
+            <Route path="/products" element={<Products onOpenContact={handleOpenContact} />} />
+            <Route path="/cases" element={<Cases onOpenContact={handleOpenContact} />} />
+            <Route path="/case/legal-link" element={<CasePage caseId="legal-link" onOpenContact={handleOpenContact} />} />
+            <Route path="/case/mira" element={<CasePage caseId="legal-link" onOpenContact={handleOpenContact} />} />
+            <Route path="/case/rj-group" element={<CasePage caseId="rj-group" onOpenContact={handleOpenContact} />} />
+            <Route path="/case/:id" element={<CasePage onOpenContact={handleOpenContact} />} />
+            <Route path="/blog" element={<Blog onOpenContact={handleOpenContact} />} />
+            <Route path="/blog/:slug" element={<BlogPostPage onOpenContact={handleOpenContact} />} />
+            {/* 404 Not Found Page */}
+            <Route path="*" element={<NotFoundPage onOpenContact={handleOpenContact} />} />
+          </Routes>
+        </Suspense>
       </AppShell>
 
       {/* Full Screen Exit Control when in fullscreen */}

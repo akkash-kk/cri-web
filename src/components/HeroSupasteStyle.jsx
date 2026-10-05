@@ -62,14 +62,8 @@ export default function HeroSupasteStyle({ onOpenContact }) {
         >
           <button
             onClick={() => onOpenContact("Hero Black Pill CTA")}
-            className="group inline-flex items-center justify-center gap-2.5 bg-black hover:bg-neutral-900 text-white font-medium text-sm sm:text-base px-8 py-4 rounded-full shadow-[0_16px_36px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_44px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-white/15"
+            className="group inline-flex items-center justify-center bg-black hover:bg-neutral-900 text-white font-medium text-sm sm:text-base px-8 py-4 rounded-full shadow-[0_16px_36px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_44px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer border border-white/15"
           >
-            <BrandLogoMark
-              size={16}
-              primaryColor="currentColor"
-              accentColor="currentColor"
-              className="w-4 h-4 fill-current group-hover:scale-110 transition-transform shrink-0"
-            />
             <span>Discuss a project</span>
           </button>
 

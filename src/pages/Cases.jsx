@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { CASES } from "../data/content";
-import Button from "../components/Button";
 import { FadeUp } from "../components/ScrollReveal";
 
 export default function Cases({ onOpenContact }) {
   const [selectedCaseCategory, setSelectedCaseCategory] = useState("All");
 
-  const caseCategories = ["All", "UI/UX Design", "E-Commerce", "Branding"];
+  const caseCategories = ["All", "AI & Legal Tech", "E-Commerce"];
 
   const filteredCases = selectedCaseCategory === "All"
     ? CASES
@@ -28,7 +27,7 @@ export default function Cases({ onOpenContact }) {
                 Our Cases
               </h1>
               <p className="text-sm sm:text-base text-neutral-600 mt-2 max-w-xl">
-                Explore our featured client works across UI/UX design, brand systems, and industrial e-commerce.
+                Explore our featured client works across AI platform design and industrial e-commerce.
               </p>
             </FadeUp>
           </div>
@@ -54,10 +53,10 @@ export default function Cases({ onOpenContact }) {
         </div>
 
         {/* Case Studies Grid - Using the exact same old card design */}
-        <motion.div layout className="our-cases-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <motion.div layout className="our-cases-grid grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-16">
           <AnimatePresence>
             {filteredCases.map((item, index) => {
-              const isMira = index === 0 && item.title.includes("MIRA");
+              const isFeatured = index === 0;
               const hasLink = item.link && item.link !== "#";
 
               return (
@@ -90,7 +89,10 @@ export default function Cases({ onOpenContact }) {
                           <span className="our-cases-card-category text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">
                             {item.category}
                           </span>
-                          <div className="our-cases-card-arrow w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center font-bold text-xs shadow-md">
+                          <div
+                            style={{ backgroundColor: item.brandColor || "#1877F2" }}
+                            className="our-cases-card-arrow w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-xs shadow-md"
+                          >
                             ↗
                           </div>
                         </div>
@@ -99,12 +101,6 @@ export default function Cases({ onOpenContact }) {
                           <p className="our-cases-card-meta text-xs text-neutral-300">{item.client} • {item.year}</p>
                         </div>
                       </div>
-
-                      {isMira && (
-                        <div className="our-cases-featured-badge absolute top-4 left-4 bg-[#1877F2] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md z-10">
-                          Featured Case Study
-                        </div>
-                      )}
                     </Link>
                   ) : (
                     <div
@@ -141,16 +137,6 @@ export default function Cases({ onOpenContact }) {
             })}
           </AnimatePresence>
         </motion.div>
-
-        {/* Footer actions */}
-        <div className="our-cases-footer flex flex-wrap items-center justify-center gap-4 pt-6">
-          <Button to="/case/mira" className="our-cases-cta-btn">
-            View MIRA Case Study ↗
-          </Button>
-          <Button to="/case/rj-group" className="our-cases-cta-btn" variant="dark">
-            View RJ Group Case Study ↗
-          </Button>
-        </div>
       </main>
     </div>
   );

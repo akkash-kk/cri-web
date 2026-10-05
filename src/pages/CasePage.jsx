@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { MIRA_GALLERY, RJ_GROUP_GALLERY } from "../data/content";
+import { LEGAL_LINK_GALLERY, MIRA_GALLERY, RJ_GROUP_GALLERY } from "../data/content";
 import Button from "../components/Button";
 import { FadeUp } from "../components/ScrollReveal";
 import { X, ArrowRight } from "lucide-react";
@@ -11,20 +11,22 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
   const { id: paramId } = useParams();
   const location = useLocation();
 
-  // Detect whether to display RJ Group or MIRA using the EXACT same layout
+  // Detect whether to display RJ Group or Legal Link using the EXACT same layout
   const isRJ =
     propCaseId === "rj-group" ||
     paramId === "rj-group" ||
     location.pathname.includes("rj-group");
 
-  // Content configuration for MIRA vs RJ Group
-  const gallery = isRJ ? RJ_GROUP_GALLERY : MIRA_GALLERY;
-  const brandAccent = isRJ ? "#DC2626" : "#00FF38";
-  const brandColor = isRJ ? "#DC2626" : "#1877F2";
+  // Content configuration for Legal Link vs RJ Group
+  const gallery = isRJ ? RJ_GROUP_GALLERY : (LEGAL_LINK_GALLERY || MIRA_GALLERY);
+  const brandAccent = isRJ ? "#DC2626" : "#FF6B00";
+  const brandColor = isRJ ? "#DC2626" : "#FF6B00";
+  const brandGold = "#F59E0B";
+  const brandLightOrange = "#FFA048";
 
   const tags = isRJ
     ? ["Branding", "E-Commerce", "Web design", "Industrial Grade", "Textile Machinery", "Genuine Spares"]
-    : ["Branding", "Web design", "Web development", "3D Product Visualization", "AI Interface", "Motion Design"];
+    : ["Legal Tech", "AI Marketplace", "UI/UX Design", "Smart Contracts", "Mobile App", "Design System"];
 
   return (
     <div className="min-h-screen bg-[#f5f4f0] text-[#27262b] pt-4 sm:pt-6 pb-16 rounded-bl-2xl sm:rounded-bl-[28px] rounded-br-none">
@@ -36,10 +38,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h1 className="text-3xl font-semibold tracking-tight text-[#27262b] leading-tight">
-                  {isRJ ? "RJ GROUP" : "MIRA"}
+                  {isRJ ? "RJ GROUP" : "LEGAL LINK"}
                 </h1>
                 <p className="text-xs text-neutral-400 font-normal mt-1">
-                  {isRJ ? "Industrial Grade – Textile Machinery" : "Los Angeles – AI, Product"}
+                  {isRJ ? "Industrial Grade – Textile Machinery" : "San Francisco – AI Legal Marketplace"}
                 </p>
               </div>
 
@@ -57,7 +59,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 </a>
 
                 <a
-                  href={isRJ ? "https://rjgrouptextile.com" : "https://mira-glasses.com"}
+                  href={isRJ ? "https://rj3.in" : "https://legallink.ai"}
                   target="_blank"
                   rel="noreferrer"
                   style={{ backgroundColor: "#27262b", color: "#ffffff" }}
@@ -91,7 +93,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             <p className="text-xs text-neutral-600 leading-relaxed">
               {isRJ
                 ? "RJ Group is a premier manufacturer and supplier of advanced industrial textile weaving machinery and genuine OEM spares, trusted by textile mills and industry leaders globally."
-                : "MIRA Glasses are smart glasses with built-in AI. They record daily events, save meaningful details and give access to information in real time."}
+                : "Legal Link is an all-in-one legal marketplace and AI platform connecting individuals and businesses with verified lawyers, 24/7 AI lawyer consultations, and smart contract analysis."}
             </p>
           </div>
 
@@ -103,7 +105,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             <p className="text-xs text-neutral-600 leading-relaxed">
               {isRJ
                 ? "We developed a high-conversion industrial e-commerce digital experience with brand color red, structured around full loom lines, rotor spinning systems, and fast 24-48h genuine spares delivery."
-                : "We aimed to build a brand identity and website for a product where AI is the core function, not an add-on. The website combines product shots, interface screens and lifestyle photography."}
+                : "We engineered an intuitive, high-trust digital legal ecosystem uniting rapid 24/7 AI lawyer consultations, 1-tap verified attorney bookings, transparent flat-fee retainers, and automated contract risk analysis."}
             </p>
           </div>
 
@@ -115,20 +117,20 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
               className="text-white rounded-2xl p-4 flex flex-col justify-between min-h-[82px] shadow-sm"
             >
               <div className="text-xl font-semibold tracking-tight leading-tight">
-                {isRJ ? "6 Lines" : "2 sequences"}
+                {isRJ ? "6 Lines" : "24/7 AI"}
               </div>
               <div className="text-[11px] text-white/90 font-normal mt-1 leading-snug">
-                {isRJ ? "weaving machines & spares" : "we made to present the product"}
+                {isRJ ? "weaving machines & spares" : "instant legal triage & contract analysis"}
               </div>
             </div>
 
             {/* Light Card */}
             <div className="bg-white rounded-2xl p-4 flex flex-col justify-between min-h-[82px] shadow-xs">
               <div className="text-xl font-semibold tracking-tight text-[#27262b] leading-tight">
-                {isRJ ? "24-48h" : "1 day"}
+                {isRJ ? "24-48h" : "< 3 mins"}
               </div>
               <div className="text-[11px] text-neutral-500 font-normal mt-1 leading-snug">
-                {isRJ ? "fast delivery dispatch worldwide" : "to design the mobile version"}
+                {isRJ ? "fast delivery dispatch worldwide" : "to match and book a verified attorney"}
               </div>
             </div>
           </div>
@@ -138,7 +140,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
         <div className="space-y-6">
           {/* 1. Image 1 */}
           <motion.div
-            key={isRJ ? "rj-img-1" : "mira-img-1"}
+            key={isRJ ? "rj-img-1" : "legal-link-img-1"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -148,15 +150,15 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
           >
             <img
               src={gallery[0]}
-              alt={isRJ ? "RJ Group Weaving Machinery" : "MIRA Project Asset 1"}
+              alt={isRJ ? "RJ Group Weaving Machinery" : "Legal Link Lawyer Booking & AI Platform"}
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
               loading="lazy"
             />
           </motion.div>
 
-          {/* 2. Container 1: Overview & Products / The Problem */}
+          {/* 2. Container 1: Overview, What, Why & The Problem */}
           <motion.div
-            key={isRJ ? "rj-overview-products" : "mira-overview-problem"}
+            key={isRJ ? "rj-overview-products" : "legal-link-overview-problem"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -171,7 +173,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   className="text-[#7e7e82] font-normal"
                   style={{ fontSize: "1.45cqw", marginBottom: "2.5cqw" }}
                 >
-                  {isRJ ? "Industrial Grade, E-Commerce, Weaving Machinery" : "AI, Smart Glasses, Wearable Tech"}
+                  {isRJ ? "Industrial Grade, E-Commerce, Weaving Machinery" : "AI Legal Marketplace, Verified Lawyers, LegalTech"}
                 </div>
                 <h2
                   className="font-medium text-white tracking-tight"
@@ -188,8 +190,8 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     </>
                   ) : (
                     <>
-                      MIRA — AI Glasses<br />
-                      for Real Life
+                      Legal Link — AI-Driven<br />
+                      Legal Marketplace
                     </>
                   )}
                 </h2>
@@ -201,10 +203,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   className="text-[#7e7e82]"
                   style={{ fontSize: "1.45cqw", marginBottom: "2.5cqw" }}
                 >
-                  {isRJ ? "E-Commerce, Web Design & Digital Spares Catalog" : "Branding, Web Design & Development"}
+                  {isRJ ? "E-Commerce, Web Design & Digital Spares Catalog" : "All-in-One Platform: AI Consultations, Lawyer Booking & Contract Analysis"}
                 </div>
 
-                {/* Overview text */}
+                {/* Overview text: What & Why */}
                 <div
                   className="space-y-[1.4cqw]"
                   style={{ fontSize: "1.42cqw", lineHeight: "1.52" }}
@@ -221,16 +223,16 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   ) : (
                     <>
                       <p>
-                        MIRA is an AI-powered smart glasses company that helps professionals remember everything they hear, see, and need to recall — in real time. From live translation to personalized prompts and unlimited memory on the display, MIRA helps doctors, lawyers, students, and creatives excel in their most critical moments, hands-free.
+                        <strong className="text-white">What:</strong> Legal Link is an AI-driven legal marketplace connecting individuals, startups, and enterprises with verified lawyers, instant AI lawyer consultations, and automated contract analysis.
                       </p>
                       <p>
-                        Our task was to translate a complex, deeply human technology into a confident digital and brand experience. One that balances innovation and warmth — and speaks just as clearly to early adopters as it does to the people they work with every day.
+                        <strong className="text-white">Why:</strong> Democratizing access to top legal counsel. Traditional legal consultations are slow, intimidating, and opaque in pricing. Legal Link streamlines the journey: users get instant 24/7 guidance from an AI Lawyer and can book verified legal experts with a single tap.
                       </p>
                     </>
                   )}
                 </div>
 
-                {/* The Problem / Products Section */}
+                {/* The Problem Section */}
                 <h3
                   style={{
                     color: brandAccent,
@@ -242,7 +244,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   }}
                   className="font-medium"
                 >
-                  {isRJ ? "ALL TYPE OF WEAVING MACHINE AVAILABLE" : "The problem"}
+                  {isRJ ? "ALL TYPE OF WEAVING MACHINE AVAILABLE" : "The problem in traditional legal services"}
                 </h3>
 
                 <div
@@ -273,13 +275,13 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   ) : (
                     <>
                       <p>
-                        Most smart glasses today feel like gadgets, not products people actually want to wear. The category is dominated by two extremes: tech-first interfaces that overwhelm with features, or fashion-first wearables that ignore why someone would put them on in the first place.
+                        Traditional legal consultations are slow, intimidating, and opaque in pricing. Individuals and founders facing critical legal dilemmas often delay seeking counsel due to steep retainer minimums, unpredictable hourly billing, and confusing intake procedures.
                       </p>
                       <p>
-                        At the same time, the idea of <span className="text-[#00FF38]">AI augmenting human memory</span> still feels abstract and uncomfortable to most people. It raises questions about privacy, identity, and what it means to rely on a machine for the things our minds used to hold.
+                        Meanwhile, off-the-shelf consumer AI chatbots provide generic, unverified advice without state-level jurisdictional compliance, exposing users to severe liability.
                       </p>
                       <p>
-                        The challenge was not only to build a brand for a new product — but to <span className="text-[#00FF38]">make a new behavior feel natural</span>. To position MIRA as a tool that gives people back their attention, their presence, and their confidence in the room.
+                        Legal Link bridges this divide: combining <span style={{ color: brandAccent }}>24/7 instant AI legal triage</span> with <span className="text-white">verified, state-bar certified attorneys</span> ready to consult on demand.
                       </p>
                     </>
                   )}
@@ -288,13 +290,13 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 {/* Live Link */}
                 <div style={{ marginTop: "2.4cqw" }}>
                   <a
-                    href={isRJ ? "https://rjgrouptextile.com" : "https://trymira.com"}
+                    href={isRJ ? "https://rj3.in" : "https://legallink.ai"}
                     target="_blank"
                     rel="noreferrer"
-                    style={{ color: isRJ ? "#1877F2" : brandAccent, fontSize: "1.52cqw" }}
+                    style={{ color: brandAccent, fontSize: "1.52cqw" }}
                     className="hover:underline font-medium inline-block transition-opacity hover:opacity-85"
                   >
-                    {isRJ ? "https://rjgrouptextile.com" : "https://trymira.com"}
+                    {isRJ ? "https://rj3.in" : "https://legallink.ai"}
                   </a>
                 </div>
               </div>
@@ -303,7 +305,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
 
           {/* 3. Image 2 */}
           <motion.div
-            key={isRJ ? "rj-img-2" : "mira-img-2"}
+            key={isRJ ? "rj-img-2" : "legal-link-img-2"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -313,15 +315,15 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
           >
             <img
               src={gallery[1]}
-              alt={isRJ ? "RJ Group Machine Assembly" : "MIRA Project Asset 2"}
+              alt={isRJ ? "RJ Group Machine Assembly" : "Legal Link 24/7 AI Lawyer Consultation Interface"}
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
               loading="lazy"
             />
           </motion.div>
 
-          {/* 4. Container 2: Brand Concept */}
+          {/* 4. Container 2: Job To Be Done & Brand Concept */}
           <motion.div
-            key={isRJ ? "rj-brand-concept" : "brand-concept-elephant-memory"}
+            key={isRJ ? "rj-brand-concept" : "legal-link-job-to-be-done"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -347,8 +349,8 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     </>
                   ) : (
                     <>
-                      MIRA is an elephant<br />
-                      memory
+                      Job To Be Done:<br />
+                      Democratizing law
                     </>
                   )}
                 </h2>
@@ -374,10 +376,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 ) : (
                   <>
                     <p>
-                      We chose the <span className="text-[#00FF38]">elephant</span> as a symbolic anchor for MIRA because of its deep cultural association with <span className="text-white">memory, wisdom, and quiet intelligence</span>. In <em>The Little Prince</em>, the image of an elephant inside a boa constrictor becomes a metaphor for seeing beyond the obvious — noticing what others overlook.
+                      <strong className="text-white">Job To Be Done:</strong> Build a trusted digital legal ecosystem that allows users to consult AI legal advisors, schedule 1-on-1 consultations with verified lawyers, and manage legal documents effortlessly.
                     </p>
                     <p>
-                      That idea resonates with MIRA&apos;s purpose: capturing subtle, meaningful details and resurfacing them when they matter most. Just as the phrase &ldquo;an elephant never forgets&rdquo; suggests unwavering memory, MIRA serves as a <span className="text-[#00FF38]">calm, constant presence that remembers for you</span>.
+                      We anchored the visual identity in a high-trust palette of deep obsidian, <span style={{ color: brandAccent }}>vibrant brand orange (#FF6B00)</span>, <span style={{ color: brandGold }}>prestigious golden (#F59E0B)</span>, and <span style={{ color: brandLightOrange }}>warm light orange (#FFA048)</span>. The design system sheds sterile courthouse clichés in favor of modern financial and legal clarity, giving users immediate reassurance when navigating complex legal matters.
                     </p>
                   </>
                 )}
@@ -387,7 +389,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
 
           {/* 5. Image 3 */}
           <motion.div
-            key={isRJ ? "rj-img-3" : "mira-img-3"}
+            key={isRJ ? "rj-img-3" : "legal-link-img-3"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -397,7 +399,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
           >
             <img
               src={gallery[2]}
-              alt={isRJ ? "RJ Group Loom Technology" : "MIRA Project Asset 3"}
+              alt={isRJ ? "RJ Group Loom Technology" : "Legal Link Verified Attorney Booking Flow"}
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
               loading="lazy"
             />
@@ -405,7 +407,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
 
           {/* 6. Container 3: The Challenge */}
           <motion.div
-            key={isRJ ? "rj-the-challenge" : "mira-the-challenge"}
+            key={isRJ ? "rj-the-challenge" : "legal-link-the-challenge"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -436,7 +438,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 >
                   {isRJ
                     ? "Industrial textile machinery procurement has historically been plagued by opaque pricing, fragmented catalogs, and unverified third-party spares."
-                    : "MIRA works at the intersection of technology and a category that people are still learning to trust. The product is complex, the audience is demanding."}
+                    : "Legal dilemmas are inherently high-stakes and intimidating. When users open Legal Link, they need immediate reassurance, verifiable attorney credentials, transparent pricing, and bank-grade privacy."}
                 </p>
 
                 <div className="space-y-[1.2cqw]">
@@ -446,7 +448,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   >
                     {isRJ
                       ? "We needed to build an e-commerce platform that:"
-                      : "We needed to build a brand and website that:"}
+                      : "We needed to build a trusted legal ecosystem that:"}
                   </h3>
 
                   <ul
@@ -475,20 +477,24 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     ) : (
                       <>
                         <li className="flex items-start gap-[0.8cqw]">
-                          <span className="text-[#00FF38] shrink-0 font-bold">•</span>
-                          <span>Explain a new technology without overwhelming with features</span>
+                          <span style={{ color: brandAccent }} className="shrink-0 font-bold">•</span>
+                          <span>Democratize access to top legal counsel without intimidating legal jargon</span>
                         </li>
                         <li className="flex items-start gap-[0.8cqw]">
-                          <span className="text-[#00FF38] shrink-0 font-bold">•</span>
-                          <span>Carry the emotional promise of the product — bringing presence back</span>
+                          <span style={{ color: brandAccent }} className="shrink-0 font-bold">•</span>
+                          <span>Deliver instantaneous, 24/7 AI legal consultations with transparent jurisdiction disclaimers</span>
                         </li>
                         <li className="flex items-start gap-[0.8cqw]">
-                          <span className="text-[#00FF38] shrink-0 font-bold">•</span>
-                          <span>Hold the balance between tech credibility and product desirability</span>
+                          <span style={{ color: brandAccent }} className="shrink-0 font-bold">•</span>
+                          <span>Enable 1-tap booking with verified, state-bar certified attorneys across 40+ specialties</span>
                         </li>
                         <li className="flex items-start gap-[0.8cqw]">
-                          <span className="text-[#00FF38] shrink-0 font-bold">•</span>
-                          <span>Avoid AR/AI clichés (blue holograms, futurism, neon glow)</span>
+                          <span style={{ color: brandAccent }} className="shrink-0 font-bold">•</span>
+                          <span>Automate smart contract analysis to highlight hidden risks and unfair clauses in seconds</span>
+                        </li>
+                        <li className="flex items-start gap-[0.8cqw]">
+                          <span style={{ color: brandAccent }} className="shrink-0 font-bold">•</span>
+                          <span>Guarantee attorney-client privilege with bank-grade end-to-end encryption</span>
                         </li>
                       </>
                     )}
@@ -500,7 +506,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
 
           {/* 7. Image 4 */}
           <motion.div
-            key={isRJ ? "rj-img-4" : "mira-img-4"}
+            key={isRJ ? "rj-img-4" : "legal-link-img-4"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -510,15 +516,15 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
           >
             <img
               src={gallery[3]}
-              alt={isRJ ? "RJ Group Precision Engineering" : "MIRA Project Asset 4"}
+              alt={isRJ ? "RJ Group Precision Engineering" : "Legal Link Smart Contract Risk Analysis"}
               className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
               loading="lazy"
             />
           </motion.div>
 
-          {/* 8. Container 4: Designing presence / Shop Now with confidence */}
+          {/* 8. Container 4: Streamlined Journey */}
           <motion.div
-            key={isRJ ? "rj-designing-speed" : "mira-designing-presence"}
+            key={isRJ ? "rj-designing-speed" : "legal-link-streamlined-journey"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -544,8 +550,8 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     </>
                   ) : (
                     <>
-                      Designing presence,<br />
-                      not features
+                      Streamlined journey,<br />
+                      not bureaucracy
                     </>
                   )}
                 </h2>
@@ -571,10 +577,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 ) : (
                   <>
                     <p>
-                      The website opens with the brand&apos;s central promise — <span className="text-[#00FF38]">giving people back their presence</span>. The hero leads with a single statement and the product itself, no feature lists, no overload. Functionality unfolds gradually as the user scrolls, mirroring how MIRA itself works: <span className="text-white">surfacing what&apos;s needed, when it&apos;s needed</span>.
+                      The platform immediately welcomes users with three intuitive paths — <span style={{ color: brandAccent }}>Ask AI Lawyer</span>, <span className="text-white">Book a Verified Attorney</span>, or <span style={{ color: brandAccent }}>Analyze a Contract</span>. Upfront pricing tiers and verified client ratings remove cost anxiety before any consultation begins.
                     </p>
                     <p>
-                      Layout stays calm and spacious. Typography does the heavy lifting. The product is shown in context, not as a spec sheet.
+                      Layout remains calm, structured, and focused. The user receives clear answers first, with direct options to escalate to human counsel whenever binding representation is needed.
                     </p>
                   </>
                 )}
@@ -582,27 +588,29 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             </div>
           </motion.div>
 
-          {/* 9. Image 5 */}
-          <motion.div
-            key={isRJ ? "rj-img-5" : "mira-img-5"}
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative rounded-2xl overflow-hidden bg-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 cursor-zoom-in"
-            onClick={() => setSelectedImg(gallery[4])}
-          >
-            <img
-              src={gallery[4]}
-              alt={isRJ ? "RJ Group Factory Spares" : "MIRA Project Asset 5"}
-              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
-              loading="lazy"
-            />
-          </motion.div>
+          {/* 9. Image 5 (Omitted for RJ Group per request) */}
+          {!isRJ && gallery[4] && (
+            <motion.div
+              key="legal-link-img-5"
+              initial={{ opacity: 0, y: 40, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative rounded-2xl overflow-hidden bg-neutral-200 shadow-sm hover:shadow-xl transition-all duration-500 cursor-zoom-in"
+              onClick={() => setSelectedImg(gallery[4])}
+            >
+              <img
+                src={gallery[4]}
+                alt="Legal Link Secure Legal Document Management"
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
+                loading="lazy"
+              />
+            </motion.div>
+          )}
 
           {/* 10. Container 5: Visual system */}
           <motion.div
-            key={isRJ ? "rj-visual-system" : "mira-visual-system"}
+            key={isRJ ? "rj-visual-system" : "legal-link-visual-system"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -645,10 +653,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 ) : (
                   <>
                     <p>
-                      The visual system is built on the contrast between a <span className="text-white">precise black foundation</span> and a <span className="text-[#1877F2]">vibrant blue accent</span>. Black carries confidence, precision, and premium weight; blue brings energy, clarity, and humanity. Together they reflect the <span className="text-[#00FF38]">dual nature of MIRA</span> — a high-tech product with a human face.
+                      The visual system is built on the contrast between an <span className="text-white">authoritative obsidian foundation</span> and <span style={{ color: brandAccent }}>vibrant brand orange (#FF6B00)</span>, complemented by <span style={{ color: brandGold }}>rich legal golden (#F59E0B)</span> and <span style={{ color: brandLightOrange }}>warm light orange (#FFA048)</span>. Black carries confidentiality, security, and prestige; orange and golden bring warmth, optimism, intellectual authority, and modern accessibility.
                     </p>
                     <p>
-                      Typography balances technical clarity with warmth, supporting both rational product communication and emotional brand storytelling.
+                      Golden verification seals and warm orange accents highlight verified bar licenses and encrypted document states, giving users unwavering trust at every step.
                     </p>
                   </>
                 )}
@@ -656,9 +664,9 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             </div>
           </motion.div>
 
-          {/* 11. Container 6: Geist Typography & Color Palette Wheel */}
+          {/* 11. Container 6: Typography & Color Palette Wheel */}
           <motion.div
-            key={isRJ ? "rj-geist-palette" : "mira-geist-palette"}
+            key={isRJ ? "rj-geist-palette" : "legal-link-geist-palette"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -667,7 +675,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             style={{ containerType: "inline-size" }}
           >
             <div className="w-full aspect-[16/10] relative flex items-center justify-between px-[5.5cqw] py-[5cqw] bg-[radial-gradient(circle_at_50%_50%,#232326_0%,#111113_80%)] overflow-hidden">
-              {/* Left Column: Geist Info & Specs */}
+              {/* Left Column: Typography Info & Specs */}
               <div className="w-[30%] h-full flex flex-col justify-between z-10">
                 {/* Top Part */}
                 <div className="space-y-[1.2cqw]">
@@ -675,13 +683,13 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     className="font-medium text-white tracking-tight"
                     style={{ fontSize: "3.8cqw", lineHeight: "1.05" }}
                   >
-                    Geist
+                    Geist &amp; Inter
                   </h2>
                   <p
                     className="text-[#9e9ea3]"
                     style={{ fontSize: "1.38cqw", lineHeight: "1.45" }}
                   >
-                    Its clean geometry and balanced proportions create a modern and restrained tone — supporting readability without drawing unnecessary attention.
+                    Engineered for supreme precision across tabular fee schedules, legal citations, and contract clauses without optical fatigue.
                   </p>
                 </div>
 
@@ -696,7 +704,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                       style={{ color: brandAccent, fontSize: "1.55cqw" }}
                       className="font-medium"
                     >
-                      Regular Medium
+                      Regular Medium Bold
                     </span>
                   </div>
                   <div
@@ -704,10 +712,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     style={{ fontSize: "1.22cqw", lineHeight: "1.45" }}
                   >
                     <p>
-                      Used in <span className="text-white">Regular and Medium weights</span>, it reflects the brand&apos;s calm, intelligent, and system-driven character. The type feels stable, clear, and functional across both interface and communication.
+                      Used in <span className="text-white">Regular and Medium weights</span>, it reflects the platform&apos;s calm, authoritative, and system-driven character.
                     </p>
                     <p>
-                      Letter spacing is slightly tightened (-1px) to maintain compact rhythm and visual control. Line spacing ranges from 90% to 120%, depending on hierarchy and layout density.
+                      Letter spacing is tightly calibrated for numeric fee transparency and high-speed chat comprehension.
                     </p>
                   </div>
                 </div>
@@ -729,14 +737,14 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                         { color: "#E1E1E3", rotate: 225 },
                       ]
                     : [
-                        { color: "#FFFFFF", rotate: -90 },
-                        { color: "#00FF38", rotate: -45 },
-                        { color: "#1877F2", rotate: 0 },
-                        { color: "#0A0A0A", rotate: 45 },
-                        { color: "#1F1F1F", rotate: 90 },
-                        { color: "#4F5052", rotate: 135 },
-                        { color: "#B4B4B6", rotate: 180 },
-                        { color: "#E1E1E3", rotate: 225 },
+                        { color: "#FFFFFF", rotate: -90 }, // Crisp White
+                        { color: "#FF6B00", rotate: -45 }, // Vibrant Orange
+                        { color: "#F59E0B", rotate: 0 },   // Golden
+                        { color: "#FFA048", rotate: 45 },  // Light Orange
+                        { color: "#0A0A0A", rotate: 90 },  // Deep Obsidian
+                        { color: "#1F1F1F", rotate: 135 }, // Charcoal
+                        { color: "#FED7AA", rotate: 180 }, // Soft Light Orange Tint
+                        { color: "#E1E1E3", rotate: 225 }, // Slate Gray
                       ]
                   ).map((sw, i) => {
                     const angleRad = (sw.rotate * Math.PI) / 180;
@@ -764,7 +772,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     style={{ color: brandAccent, borderColor: `${brandAccent}66`, fontSize: "0.85cqw" }}
                     className="absolute z-20 bg-[#161616] rounded-full border px-[1.6cqw] py-[0.5cqw] font-mono uppercase tracking-wider shadow-sm"
                   >
-                    {isRJ ? "Brand Color: Red" : "color palette"}
+                    {isRJ ? "Brand Color: Red" : "Palette: Orange • Golden • Light Orange"}
                   </div>
                 </div>
               </div>
@@ -783,9 +791,9 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
             </div>
           </motion.div>
 
-          {/* 12. Container 7: A product, not a checkout */}
+          {/* 12. Container 7: Marketplace, not a directory */}
           <motion.div
-            key={isRJ ? "rj-product-not-checkout" : "mira-product-not-checkout"}
+            key={isRJ ? "rj-product-not-checkout" : "legal-link-partner-not-directory"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -811,8 +819,8 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     </>
                   ) : (
                     <>
-                      A product, not<br />
-                      a checkout
+                      An active counsel partner,<br />
+                      not a static directory
                     </>
                   )}
                 </h2>
@@ -838,10 +846,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 ) : (
                   <>
                     <p>
-                      Buying smart glasses is not the same as buying any other product. The user has to choose a prescription, a ring size, an app setup — and trust that all three will work together. We designed the purchase journey as a <span className="text-[#00FF38]">guided experience, not a transaction</span>.
+                      Traditional legal directories merely display phone numbers with no accountability. Legal Link manages the full client journey: <span style={{ color: brandAccent }}>intake questionnaire, AI pre-briefing, encrypted document exchange, and integrated escrow billing</span>.
                     </p>
                     <p>
-                      The product page introduces MIRA as a system: <span className="text-white">glasses, ring, and app</span>. Configuration unfolds step by step, with each choice explained in context. The mobile version mirrors the desktop logic but adapts to one-thumb scanning, keeping the rhythm calm and the path clear.
+                      Attorneys arrive at every consultation already briefed with the client&apos;s AI-generated case dossier, turning a 30-minute introductory call into an actionable strategic session.
                     </p>
                   </>
                 )}
@@ -851,7 +859,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
 
           {/* 13. Container 8: Brand beyond the screen */}
           <motion.div
-            key={isRJ ? "rj-brand-beyond-screen" : "mira-brand-beyond-screen"}
+            key={isRJ ? "rj-brand-beyond-screen" : "legal-link-brand-beyond-screen"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -877,8 +885,8 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                     </>
                   ) : (
                     <>
-                      Brand beyond<br />
-                      the screen
+                      Trust across<br />
+                      every document
                     </>
                   )}
                 </h2>
@@ -904,10 +912,10 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                 ) : (
                   <>
                     <p>
-                      A brand only feels real when it lives in the world. We extended MIRA&apos;s identity into product accessories, packaging, and hardware language — <span className="text-[#00FF38]">every touchpoint a person can hold or carry</span>.
+                      A legal platform only succeeds when clients feel protected in the real world. We extended Legal Link&apos;s identity into <span style={{ color: brandAccent }}>encrypted contract seals, verified attorney bar passports, and audit-ready compliance packages</span>.
                     </p>
                     <p>
-                      The blue pouch turns the glasses into a daily companion, not a gadget kept in a case. Hardware specs are presented as quiet facts, not marketing claims. Every detail reinforces the same idea: <span className="text-white">technology made to be lived with, not displayed</span>.
+                      Every contract summary and certified lawyer credential carries digital verification hashes, providing institutional certainty for individuals and enterprise legal departments alike.
                     </p>
                   </>
                 )}
@@ -917,7 +925,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
 
           {/* 14. Container 9: The result */}
           <motion.div
-            key={isRJ ? "rj-the-result" : "mira-the-result"}
+            key={isRJ ? "rj-the-result" : "legal-link-the-result"}
             initial={{ opacity: 0, y: 40, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -954,7 +962,7 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
                   </p>
                 ) : (
                   <p>
-                    A complete identity system — from logotype and visual language to web experience — that gives MIRA a <span className="text-[#00FF38]">confident place in the smart wearables category</span>. The brand stands apart through the idea of memory and presence, not tech aesthetics. Built to scale across product, marketing, and PR.
+                    A complete identity system, AI platform, and mobile application that positions Legal Link as the <span style={{ color: brandAccent }}>premier legal marketplace</span>. By uniting verified attorneys, 24/7 AI guidance, and automated contract analysis, Legal Link democratizes access to top legal counsel for individuals, startups, and enterprises worldwide.
                   </p>
                 )}
               </div>
@@ -965,23 +973,23 @@ export default function CasePage({ caseId: propCaseId, onOpenContact }) {
           <FadeUp className="bg-white rounded-3xl p-8 sm:p-12 border border-neutral-200/80 shadow-md flex flex-col sm:flex-row items-center justify-between gap-6 mt-12">
             <div>
               <small
-                style={{ color: brandColor }}
+                style={{ color: "#1877F2" }}
                 className="text-xs uppercase font-mono tracking-widest font-bold"
               >
                 Next Showcase
               </small>
               <h3 className="text-2xl sm:text-3xl font-bold mt-1">
-                {isRJ ? "MIRA AI Glasses" : "RJ Group International"}
+                {isRJ ? "Legal Link AI" : "RJ Group International"}
               </h3>
               <p className="text-xs text-neutral-500 mt-1">
                 {isRJ
-                  ? "Smart AI Wearables Interface & Memory Timeline"
+                  ? "All-in-One Legal Marketplace & 24/7 AI Lawyer Consultations"
                   : "Premium Industrial Grade • Advanced Textile Machinery Solutions"}
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Button to={isRJ ? "/case/mira" : "/case/rj-group"} variant="dark">
-                {isRJ ? "view MIRA case" : "view RJ Group case"}
+              <Button to={isRJ ? "/case/legal-link" : "/case/rj-group"} variant="dark">
+                {isRJ ? "view Legal Link case" : "view RJ Group case"}
               </Button>
               <Button to="/#cases" variant="outline">
                 view all works

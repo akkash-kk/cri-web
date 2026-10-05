@@ -32,9 +32,14 @@ const routes = [
     description: 'Explore client case studies, UI/UX designs, brand identities, and mobile app launches by Criyon.'
   },
   {
+    path: 'case/legal-link',
+    title: 'Legal Link AI Legal Marketplace & Lawyer Booking | Criyon Case Study',
+    description: 'All-in-one legal marketplace and AI platform connecting individuals and businesses with verified lawyers, 24/7 AI consultations, and contract analysis.'
+  },
+  {
     path: 'case/mira',
-    title: 'MIRA AI Smart Glasses UI/UX Case Study | Criyon',
-    description: 'End-to-end design system, mobile companion app, and spatial UI for next-gen AI glasses.'
+    title: 'Legal Link AI Legal Marketplace & Lawyer Booking | Criyon Case Study',
+    description: 'All-in-one legal marketplace and AI platform connecting individuals and businesses with verified lawyers, 24/7 AI consultations, and contract analysis.'
   },
   {
     path: 'case/rj-group',

@@ -15,7 +15,7 @@ import { Sparkles, ArrowDown, ShieldCheck, Zap, Layers, Sliders, Scissors, Shape
 export default function Home({ onOpenContact, onOpenLogoLab }) {
   const [selectedCaseCategory, setSelectedCaseCategory] = useState("All");
 
-  const caseCategories = ["All", "UI/UX Design", "E-Commerce", "Branding"];
+  const caseCategories = ["All", "AI & Legal Tech", "E-Commerce"];
 
   const filteredCases = selectedCaseCategory === "All"
     ? CASES
@@ -64,10 +64,10 @@ export default function Home({ onOpenContact, onOpenLogoLab }) {
         </div>
 
         {/* Case Studies Grid */}
-        <motion.div layout className="our-cases-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <motion.div layout className="our-cases-grid grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
           <AnimatePresence>
             {filteredCases.map((item, index) => {
-              const isMira = index === 0 && item.title.includes("MIRA");
+              const isFeatured = index === 0;
               const hasLink = item.link && item.link !== "#";
 
               return (
@@ -100,7 +100,10 @@ export default function Home({ onOpenContact, onOpenLogoLab }) {
                           <span className="our-cases-card-category text-[11px] font-mono uppercase bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full">
                             {item.category}
                           </span>
-                          <div className="our-cases-card-arrow w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center font-bold text-xs shadow-md">
+                          <div
+                            style={{ backgroundColor: item.brandColor || "#1877F2" }}
+                            className="our-cases-card-arrow w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-xs shadow-md"
+                          >
                             ↗
                           </div>
                         </div>
@@ -109,12 +112,6 @@ export default function Home({ onOpenContact, onOpenLogoLab }) {
                           <p className="our-cases-card-meta text-xs text-neutral-300">{item.client} • {item.year}</p>
                         </div>
                       </div>
-
-                      {isMira && (
-                        <div className="our-cases-featured-badge absolute top-4 left-4 bg-[#1877F2] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md z-10">
-                          Featured Case Study
-                        </div>
-                      )}
                     </Link>
                   ) : (
                     <div
@@ -151,15 +148,6 @@ export default function Home({ onOpenContact, onOpenLogoLab }) {
             })}
           </AnimatePresence>
         </motion.div>
-
-        <div className="our-cases-footer flex flex-wrap items-center justify-center gap-4">
-          <Button to="/case/mira" className="our-cases-cta-btn">
-            View MIRA Case Study ↗
-          </Button>
-          <Button to="/case/rj-group" className="our-cases-cta-btn" variant="dark">
-            View RJ Group Case Study ↗
-          </Button>
-        </div>
       </section>
 
       {/* WORKFLOW & TAILOR SECTIONS */}
