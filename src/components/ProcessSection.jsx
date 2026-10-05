@@ -269,8 +269,8 @@ export default function ProcessSection() {
           </div>
 
           {/* DYNAMIC SCALING ACCORDION ROW */}
-          <div className="relative w-full flex-1 min-h-0 my-auto py-1 sm:py-2 flex items-stretch">
-            <div className="flex flex-col md:flex-row items-stretch gap-3 lg:gap-4 w-full h-full min-h-0">
+          <div className="relative w-full flex-1 min-h-0 my-auto py-1 sm:py-2 flex items-stretch justify-center md:max-h-[480px] lg:max-h-[520px] xl:max-h-[560px]">
+            <div className="flex flex-col md:flex-row items-stretch gap-3 lg:gap-4 w-full h-full min-h-0 max-h-full">
               {STAGES.map((stage, idx) => {
                 const Icon = stage.icon;
                 const isActive = idx === activeStageIndex;

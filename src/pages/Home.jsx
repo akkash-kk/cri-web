@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ASSETS, CASES } from "../data/content";
 import Button, { Btn } from "../components/Button";
 import { FadeUp, FadeIn, SlideIn, ScaleUp, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
@@ -8,22 +8,12 @@ import Counter from "../components/Counter";
 import ProcessSection from "../components/ProcessSection";
 import HumbleWorkflowTailor from "../components/HumbleWorkflowTailor";
 import FaqSection from "../components/FaqSection";
+import HeroSupasteStyle from "../components/HeroSupasteStyle";
 import { BrandLogoMark } from "../components/BrandLogo";
 import { Sparkles, ArrowDown, ShieldCheck, Zap, Layers, Sliders, Scissors, Shapes, ArrowUpRight, ShoppingCart } from "lucide-react";
 
 export default function Home({ onOpenContact, onOpenLogoLab }) {
   const [selectedCaseCategory, setSelectedCaseCategory] = useState("All");
-  const heroRef = useRef(null);
-
-  // Parallax on hero
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-
-  const heroY = useTransform(heroScroll, [0, 1], [0, 140]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.75], [1, 0]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.96]);
 
   const caseCategories = ["All", "UI/UX Design", "E-Commerce", "Branding"];
 
@@ -33,79 +23,8 @@ export default function Home({ onOpenContact, onOpenLogoLab }) {
 
   return (
     <div className="min-h-screen bg-[#f5f4f0] text-[#27262b] overflow-x-clip rounded-bl-2xl sm:rounded-bl-[28px] rounded-br-none relative">
-      {/* 1. HERO SECTION */}
-      <section
-        id="hero"
-        ref={heroRef}
-        aria-label="Hero"
-        className="section-hero hero min-h-[calc(100dvh-64px)] md:min-h-screen flex flex-col justify-center items-end px-6 sm:px-14 lg:pr-24 relative py-12 md:py-0"
-      >
-        <motion.div
-          style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-          className="hero-container w-full max-w-[640px] space-y-6 my-auto"
-        >
-          {/* Eyebrow badge */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="hero-badge inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-neutral-200/80 shadow-xs text-xs font-semibold uppercase tracking-wider text-[#27262b]"
-          >
-            <BrandLogoMark size={14} primaryColor="#27262b" accentColor="#1877F2" className="animate-spin" style={{ animationDuration: "12s" }} />
-            <span>Criyon</span>
-          </motion.div>
-
-          {/* Main Display Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="hero-title text-4xl sm:text-5xl lg:text-[56px] leading-[1.12] font-medium tracking-tight"
-          >
-            Branding, UI/UX &amp;
-            <br />
-            Mobile App Design Studio
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="hero-description text-base sm:text-lg text-neutral-600 leading-relaxed max-w-lg"
-          >
-            We turn ambitious ideas into high-impact brand identities, intuitive mobile apps, and high-converting websites that drive real growth.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="hero-actions flex flex-wrap items-center gap-4 pt-2"
-          >
-            <Btn onClick={() => onOpenContact("Full Project Blueprint")} className="hero-btn-primary">
-              Discuss a project
-            </Btn>
-            <a
-              href="#process"
-              className="hero-btn-secondary inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-600 hover:text-[#1877F2] transition-colors py-2 px-3"
-            >
-              <span>Explore process</span>
-              <ArrowDown size={14} className="animate-bounce" />
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* Bottom scroll prompt indicator anchored at the bottom of the viewport */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="hero-scroll-prompt absolute bottom-8 left-6 sm:left-14 flex items-center gap-3 text-neutral-400 font-mono text-[11px] uppercase tracking-widest pointer-events-none"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#1877F2]" />
-          <span>Scroll to explore</span>
-        </motion.div>
-      </section>
+      {/* 1. HERO SECTION (Supaste-style vibrant royal-blue gradient, floating pill nav, display typography & macOS Dynamic Island Dock) */}
+      <HeroSupasteStyle onOpenContact={onOpenContact} />
 
       {/* 2. PROCESS / APPROACH SECTION (GSAP PINNED ON-SCROLL ANIMATION) */}
       <ProcessSection />

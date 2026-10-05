@@ -6,6 +6,15 @@
   --color-brand-accent: #1877F2;
 }
 
+.font-serif-italic {
+  font-family: 'Instrument Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
+.hero-vibrant-gradient {
+  background: radial-gradient(120% 90% at 50% 0%, #0352f7 0%, #0c61fb 38%, #207cfb 62%, #60b0fc 82%, #b5e1fd 100%);
+}
+
 :root {
   --bg: #0f0f14;
   --text: #111111;

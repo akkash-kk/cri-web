@@ -1,6 +1,6 @@
 {
-  "name": "Remix Remix Remix Remix box",
-  "description": "Criyon | Branding, UI/UX & Mobile App Design Studio portfolio featuring MIRA AI Glasses, RJ Group Textile Machinery E-Commerce, and Startech Awards.",
+  "name": "Supaste — Clipboard History for macOS",
+  "description": "Supaste saves your clipboard and screenshots in a beautiful visual history, automatically grouped by type, app, and custom categories.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

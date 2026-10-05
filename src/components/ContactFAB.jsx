@@ -9,8 +9,19 @@ export default function ContactFAB() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 1500);
-    return () => clearTimeout(timer);
+    const handleScroll = () => {
+      // Show only when the user scrolls down past the initial hero section
+      if (window.scrollY > 280) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSubmit = (e) => {
